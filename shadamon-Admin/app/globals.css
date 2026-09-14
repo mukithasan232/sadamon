@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  /* Pure White */
+  --foreground: #000000;
+  /* Pure Black */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* --font-sans: 'Verdana', 'Tahoma', sans-serif; */
+  --font-sans: 'Tahoma', 'Verdana', sans-serif;
+
+  /* FONT SIZES - Global Control - Default Values*/
+  /* --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.25rem;
+
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1; */
+
+  /* FONT SIZES - Global Control - Enlarged Values (Version 1) */
+  --text-xs: 0.85rem;
+  --text-xs--line-height: 1rem;
+
+  --text-sm: 0.975rem;
+  --text-sm--line-height: 1.25rem;
+
+  --text-base: 1.1rem;
+  --text-base--line-height: 1.5rem;
+
+  --text-lg: 1.225rem;
+  --text-lg--line-height: 1.75rem;
+
+  --text-xl: 1.35rem;
+  --text-xl--line-height: 1.75rem;
+
+  --text-2xl: 1.6rem;
+  --text-2xl--line-height: 2rem;
+
+  --text-3xl: 1.975rem;
+  --text-3xl--line-height: 2.25rem;
+
+  --text-4xl: 2.35rem;
+  --text-4xl--line-height: 2.5rem;
+
+  --text-5xl: 3.1rem;
+  --text-5xl--line-height: 1;
+
+  /* FONT SIZES - Global Control - Enlarged Values (Version 2) */
+  /* --text-xs: 0.95rem;
+  --text-xs--line-height: 1.1rem;
+
+  --text-sm: 1.075rem;
+  --text-sm--line-height: 1.35rem;
+
+  --text-base: 1.2rem;
+  --text-base--line-height: 1.6rem;
+
+  --text-lg: 1.325rem;
+  --text-lg--line-height: 1.85rem;
+
+  --text-xl: 1.45rem;
+  --text-xl--line-height: 1.85rem;
+
+  --text-2xl: 1.7rem;
+  --text-2xl--line-height: 2.1rem;
+
+  --text-3xl: 2.075rem;
+  --text-3xl--line-height: 2.35rem;
+
+  --text-4xl: 2.45rem;
+  --text-4xl--line-height: 2.6rem;
+
+  --text-5xl: 3.2rem;
+  --text-5xl--line-height: 1; */
+}
+
+/* Removed dark mode media query to enforce light mode */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Verdana', sans-serif;
+  /* font-family: 'Tahoma', sans-serif; */
+}
+
+/* Hard override for text colors to enforce black as requested */
+[class*="text-slate-"],
+[class*="text-gray-"],
+[class*="text-zinc-"],
+[class*="text-neutral-"],
+[class*="text-stone-"] {
+  color: #000000 !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}

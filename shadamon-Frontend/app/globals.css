@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Define default Tailwind font to use our custom fonts */
+  /* --font-sans: 'Verdana', 'Tahoma', sans-serif; */
+  --font-sans: 'Tahoma', 'Verdana', sans-serif;
+
+  /* BRAND PALETTE (Orange) - Used to be Indigo */
+  --color-brand-50: #fff7ed;
+  --color-brand-100: #ffedd5;
+  --color-brand-200: #fed7aa;
+  --color-brand-300: #fdba74;
+  --color-brand-400: #fb923c;
+  --color-brand-500: #f97316;
+  --color-brand-600: #ea580c;
+  --color-brand-700: #c2410c;
+  --color-brand-800: #9a3412;
+  --color-brand-900: #7c2d12;
+  --color-brand-950: #431407;
+
+  /* ACCENT PALETTE (Amber) - Used to be Violet */
+  --color-accent-50: #fffbeb;
+  --color-accent-100: #fef3c7;
+  --color-accent-200: #fde68a;
+  --color-accent-300: #fcd34d;
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+  --color-accent-700: #b45309;
+  --color-accent-800: #92400e;
+  --color-accent-900: #78350f;
+  --color-accent-950: #451a03;
+
+  /* FONT SIZES - Global Control - Default Values*/
+  /* --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.25rem;
+
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1; */
+
+  /* FONT SIZES - Global Control - Enlarged Values (Version 1) */
+  /* --text-xs: 0.85rem;
+  --text-xs--line-height: 1rem;
+  
+  --text-sm: 0.975rem;
+  --text-sm--line-height: 1.25rem;
+  
+  --text-base: 1.1rem;
+  --text-base--line-height: 1.5rem;
+  
+  --text-lg: 1.225rem;
+  --text-lg--line-height: 1.75rem;
+  
+  --text-xl: 1.35rem;
+  --text-xl--line-height: 1.75rem;
+
+  --text-2xl: 1.6rem;
+  --text-2xl--line-height: 2rem;
+
+  --text-3xl: 1.975rem;
+  --text-3xl--line-height: 2.25rem;
+
+  --text-4xl: 2.35rem;
+  --text-4xl--line-height: 2.5rem;
+
+  --text-5xl: 3.1rem;
+  --text-5xl--line-height: 1; */
+
+  /* FONT SIZES - Global Control - Enlarged Values (Version 2) */
+  --text-xs: 0.95rem;
+  --text-xs--line-height: 1.1rem;
+
+  --text-sm: 1.075rem;
+  --text-sm--line-height: 1.35rem;
+
+  --text-base: 1.2rem;
+  --text-base--line-height: 1.6rem;
+
+  --text-lg: 1.325rem;
+  --text-lg--line-height: 1.85rem;
+
+  --text-xl: 1.45rem;
+  --text-xl--line-height: 1.85rem;
+
+  --text-2xl: 1.7rem;
+  --text-2xl--line-height: 2.1rem;
+
+  --text-3xl: 2.075rem;
+  --text-3xl--line-height: 2.35rem;
+
+  --text-4xl: 2.45rem;
+  --text-4xl--line-height: 2.6rem;
+
+  --text-5xl: 3.2rem;
+  --text-5xl--line-height: 1;
+}
+
+/* Removed dark mode media query to enforce light mode/black text */
+
+/* Hard override for text colors to enforce black as requested */
+[class*="text-slate-"],
+[class*="text-gray-"],
+[class*="text-zinc-"],
+[class*="text-neutral-"],
+[class*="text-stone-"] {
+  color: #000000 !important;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Toggle between these fonts as per your preference */
+  font-family: 'Verdana', sans-serif;
+  /* font-family: 'Tahoma', sans-serif; */
+}
+
+/* Prevent auto-zoom on iOS when focusing inputs */
+@media screen and (max-width: 768px) {
+  input, 
+  select, 
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+#main-dashboard-scroller {
+  overflow-anchor: none;
+}
