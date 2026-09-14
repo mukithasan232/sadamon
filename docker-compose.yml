@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: shadamon_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./shadamon-Backend
+      dockerfile: Dockerfile
+    container_name: shadamon_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - MONGO_URI=mongodb://mongodb:27017/shadamon
+    depends_on:
+      - mongodb
+    volumes:
+      - ./shadamon-Backend:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./shadamon-Frontend
+      dockerfile: Dockerfile
+    container_name: shadamon_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    volumes:
+      - ./shadamon-Frontend:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+  admin:
+    build:
+      context: ./shadamon-Admin
+      dockerfile: Dockerfile
+    container_name: shadamon_admin
+    ports:
+      - "3001:3001"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    volumes:
+      - ./shadamon-Admin:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
