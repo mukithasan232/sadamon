@@ -1,1 +1,6 @@
 node_modules
+
+# Block all env files globally across monorepo
+**/.env
+**/.env.*
+!**/.env.example
