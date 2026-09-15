@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, TrendingUp, Users, Map, Briefcase } from 'lucide-react';
 import { API_BASE_URL } from '../utils/apiConfig';
+import { getImageUrl } from '../utils/imageUrl';
+import { formatAdPrice } from '../utils/formatPrice';
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -13,7 +15,7 @@ export default function Home() {
     useEffect(() => {
         const fetchRecentAds = async () => {
             try {
-                const res = await fetch(`${API_BASE_URL}/api/ads/public?limit=8`);
+                const res = await fetch(`${API_BASE_URL}/api/ads/public/feed?limit=8`);
                 if (res.ok) {
                     const data = await res.json();
                     setRecentAds(data.data || []);
@@ -132,7 +134,7 @@ export default function Home() {
                                 <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200 transition-all hover:shadow-md h-full flex flex-col">
                                     <div className="relative aspect-[4/3] bg-slate-100">
                                         <img 
-                                            src={ad.images?.[0] ? `${API_BASE_URL}/${ad.images[0].replace(/^\/+/, '')}` : '/placeholder.png'} 
+                                            src={getImageUrl(ad.images?.[0]) || '/placeholder.png'} 
                                             alt={ad.headline || 'Ad'} 
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                             onError={(e) => { e.currentTarget.src = '/placeholder.png'; }}
@@ -143,9 +145,9 @@ export default function Home() {
                                             {ad.headline}
                                         </h3>
                                         <div className="mt-auto">
-                                            {ad.price && (
+                                            {formatAdPrice(ad) && (
                                                 <div className="text-lg font-bold text-slate-900 mb-1">
-                                                    ৳ {ad.price.toLocaleString()}
+                                                    {formatAdPrice(ad)}
                                                 </div>
                                             )}
                                             <div className="text-xs text-slate-500 flex items-center justify-between">
