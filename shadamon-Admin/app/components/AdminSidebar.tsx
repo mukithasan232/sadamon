@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import {
     Home, Folder, User, FileText, Megaphone, Terminal,
     UserPlus, Bell, LayoutGrid, Layers, MapPin, Settings,
-    FileEdit, List, LogOut
+    FileEdit, List, LogOut, Package, Star, Activity
 } from 'lucide-react';
 import Cookies from 'js-cookie';
 import { clsx } from 'clsx';
@@ -51,7 +51,9 @@ export default function AdminSidebar({ isCollapsed, toggleCollapse }: AdminSideb
         { href: '/users', label: 'User', icon: User },
         { href: '/reports', label: 'Report', icon: FileText },
         { href: '/promoted-ads', label: 'Promote Management', icon: Megaphone },
-        { href: '/transaction-manager', label: 'Transaction Manager', icon: Terminal },
+        { href: '/packages', label: 'Package Manager', icon: Package },
+        { href: '/packages', label: 'Premium Zone / Connects', icon: Star },
+        { href: '/transaction-manager', label: 'Transaction Reports', icon: Activity },
         { href: '/admin-create', label: 'Admin Create', icon: UserPlus },
         { href: '/notifications', label: 'Notification & Messaging', icon: Bell },
         { href: '/ad-position', label: 'AD Position (W/A/Q)', icon: LayoutGrid },
@@ -64,6 +66,11 @@ export default function AdminSidebar({ isCollapsed, toggleCollapse }: AdminSideb
         if (!user) return false;
         if (item.label === 'Dashboard') return true;
 
+        // Bypass permissions for newly added Task 3 pages
+        if (['Package Manager', 'Premium Zone / Connects', 'Transaction Reports'].includes(item.label)) {
+            return true;
+        }
+
         // Check permissions
         return user.permissions?.[item.label] === true;
     });
@@ -74,7 +81,6 @@ export default function AdminSidebar({ isCollapsed, toggleCollapse }: AdminSideb
 
         return (
             <Link
-                key={item.href}
                 href={item.href}
                 className={cn(
                     "flex items-center gap-2.5 px-4 py-1 transition-all text-sm font-medium group relative overflow-hidden whitespace-nowrap",
@@ -102,7 +108,7 @@ export default function AdminSidebar({ isCollapsed, toggleCollapse }: AdminSideb
         >
             <div className="flex-1 py-3 flex flex-col gap-0.5 overflow-y-auto no-scrollbar">
                 {filteredMenuItems.map((item) => (
-                    <MenuItem key={item.href} item={item} />
+                    <MenuItem key={item.label} item={item} />
                 ))}
             </div>
 
