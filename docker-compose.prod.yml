@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: shadamon_prod_mongo
+    restart: always
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - mongo_prod_data:/data/db
+
+  backend:
+    build:
+      context: ./shadamon-Backend
+      dockerfile: Dockerfile
+    container_name: shadamon_prod_backend
+    restart: always
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      - PORT=8000
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongodb:27017/shadamon
+      - JWT_SECRET=${JWT_SECRET:-supersecretjwtkeyforprod}
+      - FRONTEND_URL=${LIVE_DOMAIN_URL:-http://localhost:3000}
+      - BACKEND_URL=${LIVE_API_URL:-http://localhost:8000}
+    depends_on:
+      - mongodb
+
+  frontend:
+    build:
+      context: ./shadamon-Frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${LIVE_API_URL:-http://localhost:8000}
+    container_name: shadamon_prod_frontend
+    restart: always
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+
+  admin:
+    build:
+      context: ./shadamon-Admin
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${LIVE_API_URL:-http://localhost:8000}
+    container_name: shadamon_prod_admin
+    restart: always
+    ports:
+      - "127.0.0.1:3001:3001"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+
+volumes:
+  mongo_prod_data:
